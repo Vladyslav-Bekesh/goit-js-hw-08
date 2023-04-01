@@ -57,14 +57,3 @@ function inputForm() {
   localStorage.setItem('feedback-form-state', JSON.stringify(formStates));
 }
 
-// const parsedStorage = JSON.parse(localStorage.getItem('feedback-form-state'));
-
-// //* check email
-// if (parsedStorage.email !== '') {
-//   refs.formInput.value = parsedStorage.email;
-// }
-
-// //* check textArea
-// if (parsedStorage.text !== '') {
-//   refs.formtTextarea.value = parsedStorage.text;
-// }
