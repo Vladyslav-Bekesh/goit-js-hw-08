@@ -1,5 +1,5 @@
 //! IMPORT LIBRARIES ---------
-import _ from 'lodash';
+import throttle from 'lodash.throttle';
 
 //! FORM ---------
 
@@ -13,7 +13,7 @@ const refs = {
 
 // --- events listeners
 refs.form.addEventListener('submit', submitingForm);
-refs.form.addEventListener('input', _.throttle(inputForm, 500));
+refs.form.addEventListener('input', throttle(inputForm, 500));
 
 // --- functions
 checkStorage();
@@ -34,18 +34,23 @@ function checkStorage() {}
 
 function submitingForm(event) {
   event.preventDefault();
-  localStorage.removeItem('feedback-form-state');
 
-  //* logging form data
-  const formData = {
-    email: refs.formInput.value,
-    text: refs.formtTextarea.value,
-  };
-  console.dir(formData);
+  if ((refs.formInput.value !== '' && refs.formtTextarea.value !== '')) {
+    localStorage.removeItem('feedback-form-state');
 
-  //* clear fields
-  refs.formInput.value = '';
-  refs.formtTextarea.value = '';
+    //* logging form data
+    const formData = {
+      email: refs.formInput.value,
+      text: refs.formtTextarea.value,
+    };
+    console.dir(formData);
+
+    //* clear fields
+    refs.formInput.value = '';
+    refs.formtTextarea.value = '';
+    return;
+  }
+  alert("fill all fields")
 }
 
 function inputForm() {
